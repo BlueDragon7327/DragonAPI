@@ -16,7 +16,7 @@ CLAUDE_API_URL = "https://api.anthropic.com/v1/claude-3.5/complete"
 CLAUDE_API_KEY = "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"  # Replace with your actual Claude API key
 
 
-def call_groq(prompt, history):
+def call_llama(prompt, history):
     client = Groq(api_key=GROQ_API_KEY)
 
     # Append the user prompt to the history
@@ -74,8 +74,8 @@ def api_endpoint():
     prompt = req_data.get('prompt')
     history = req_data.get('history', [{"role": "system", "content": ""}])
 
-    if model == 'groq':
-        response, updated_history = call_groq(prompt, history)
+    if model == 'llama':
+        response, updated_history = call_llama(prompt, history)
         return jsonify({"response": response, "history": updated_history})
 
     elif model == 'gemini':
